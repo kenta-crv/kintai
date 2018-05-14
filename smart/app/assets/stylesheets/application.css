@@ -1,0 +1,272 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+ 
+ 
+                                                         /*ベース情報*/
+* {
+  box-sizing: border-box;
+}
+
+/*書体はヒラギノフォントを利用します。*/
+body {
+  margin: 0;
+  font-family: "Hiragino Kaku Gothic ProN";
+  width:1250px;
+  background-color:rgba(242,242,225,1.0);   /*ベージュ*/
+}
+
+                                                    /*フォントの指定はなし*/
+a {
+  text-decoration: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+                                                    /*ヘッダーの始まり*/
+/*幅・位置の指定*/
+.container {
+  max-width: 1170px;
+  width: 100%;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
+/*ヘッダーのベース設定*/
+header {
+  height: 65px;
+  width: 1250px;
+  background-color: rgba(0,94,94,1.0); 
+}
+
+/*ヘッダー内のロゴ指定*/
+.menu_icon {
+  height:65px;
+}
+
+/*ロゴは左へ*/
+.header-left {
+  float: left;
+}
+
+/*ヘッダーナビは右へ*/
+.header-right {
+  float: right;
+  margin-right: -25px;
+  font-size:15px;
+  text-shadow: 2px 3px 1px #000;
+}
+
+/*ヘッダーナビの位置設定*/
+.header-right a {
+  line-height: 65px;
+  padding: 0 15px;
+  color: white;
+  display: block;
+  float: left;
+  position: relative;
+  transition: all 0.5s;
+}
+
+/*ヘッダーの上にマウスを置くと色変化*/
+.header-right a:hover {
+  background-color: rgba(255,255,255,0.1);
+}
+
+                                                                /*ヘッダーの終わり*/
+
+
+
+
+
+
+
+　　                                               /*ヘッダーナビドロップダウン*/
+.child{
+	display: block;
+}
+
+
+
+
+
+
+
+
+
+
+
+                                                                    /*サイドのstart*/
+
+#side_navi{
+  float:left;
+  width:350px;
+  height:100%;
+  background-color:rgba(86,204,125,1.0);
+  text-align:center;
+  position:absolute;
+  top:65px;
+  
+}
+
+/*h2 見出し*/
+.heading {
+    background-color:rgba(32,175,103,1.0);
+    color:white;
+    font-size:16px;
+    font-weight:normal;
+    width:350px;
+    height:50px;
+    line-height: 50px;
+    margin-top:0px;
+    margin-bottom:20px;
+}
+                                                                /*サイドの end*/
+
+
+
+                                                               /*メインのサイズ*/
+
+#main{
+  width:900px;
+  margin-left:350px;
+  padding:20px 50px;
+}
+
+
+
+                                                            /*エラーコマンド共通*/
+.error {
+    font-size:12px;
+    font-weight: bold;
+    color: tomato;
+}
+
+                                                            /*編集コマンド共通*/
+.command {
+   font-size:10px;
+}
+
+
+                                                            /*テーブル共通*/
+table , td, th {
+  border-bottom:1px gray solid;
+  border-collapse: collapse;
+  text-align:center;
+  font-weight:normal;
+}
+
+td, th {
+  padding: 10px;
+  height: 25px;
+  font-size:12px;
+}
+th {
+  background-color: mediumseagreen;
+}
+td {
+  background-color: #e6ecf0;
+}
+
+                                                        /*必須項目*/
+.label{
+    background-color:orange;
+    margin-left:5px;
+}
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                            /*モーダル*/
+.login-modal-wrapper , .signup-modal-wrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 100;
+  display: none;
+}
+
+.modal {
+  position: absolute;
+  top: 20%;
+  left: 34%;
+  background-color: #e6ecf0;
+  padding: 20px 0 40px;
+  border-radius: 10px;
+  width: 450px;
+  height: auto;
+  text-align: center;
+}
+
+.fa-times {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  color: rgba(128, 128, 128, 0.46);
+  cursor: pointer;
+}
+
+#signup-form, #login-form {
+  width: 100%;
+}
+
+#signup-form h2, #login-form h2 {
+  color: #5f5d60;
+  letter-spacing: 1px;
+  margin-bottom: 40px;
+}
+
+#signup-form input, #login-form input {
+  width: 320px;
+  margin-bottom: 20px;
+  font-size: 12px;
+  padding: 12px 12px;
+  border: 1px solid #d0d5d8;
+  border-radius: 5px;
+}
+
+#submit-btn {
+  display: inline-block;
+  padding: 14px 140px;
+  background-color: #5dca88;
+  border: none;
+  border-radius: 3px;
+  color: white;
+  margin: 10px auto;
+  cursor: pointer;
+}

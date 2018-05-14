@@ -1,0 +1,135 @@
+<div id="side_navi">
+		<h2 class="heading">登録者一覧</h2>
+			<table>
+        			<colgroup>
+            			<col width="35%">
+            			<col width="65%">
+       			　 </colgroup>
+       			<% @rules.each do |rule|%>
+        		<tr>
+					<th>試用期間</th>
+					<td><%= link_to rule.try, rules_path(rule)%></td>
+				</tr>
+				<tr>
+					<th>勤務開始時間</th>
+					<td><%= rule.work_start %></td>
+				</tr>
+				<tr>
+					<th>休憩開始時間</th>
+					<td><%= rule.break_in %></td>
+				</tr>
+				<tr>
+					<th>休憩終了時間</th>
+					<td><%= rule.break_out %></td>
+				</tr>
+				<tr>
+					<th>勤務終了時間</th>
+					<td><%= rule.work_out %></td>
+				</tr>
+				<tr>
+					<th>休日</th>
+					<td><%= rule.holiday %></td>
+				</tr>
+				<tr>
+					<th>手当</th>
+					<td><%= rule.allowance%></td>
+				</tr>
+				<tr>
+					<th>手当詳細</th>
+					<td><%= rule.allowance_contents %></td>
+				</tr>
+				<tr>
+					<th>締め日</th>
+					<td><%= rule.closing_date%></td>
+				</tr>
+				<tr>
+					<th>支払い日</th>
+					<td><%= rule.payment_date %></td>
+				</tr>
+				<tr>
+					<th>控除</th>
+					<td><%= rule.desuction %></td>
+				</tr>
+										
+								<% end %>
+			</table>
+ </div>
+<div id="main">
+
+<h2 class="worker_h2">就業情報を登録する</h2>
+		<%= form_for :rule, url: rules_path do |f|%>
+			<table class="worker_table">
+				<caption>基本情報</caption>
+        			<colgroup>
+            			<col width="40%">
+            			<col width="60%">
+       			　 </colgroup>
+        		<tr>
+					<th>試用期間<span class="label label-blue">必須</span></br>
+									<small>例）３ヶ月</small></th>
+					<td><%= f.text_field :try%></td>
+				</tr>
+				<tr>
+					<th>勤務開始時間<span class="label label-blue">必須</span></br>
+									<small>例）１０時００分</small></th>
+					<td><%= f.time_field :work_start%></td>
+				</tr>
+				<tr>
+					<th>休憩開始時間<span class="label label-blue">必須</span></br>
+									<small>例）１２時００分</small></th>
+					<td><%= f.time_field :break_in%></td>
+				</tr>
+				<tr>
+					<th>休憩終了時間<span class="label label-blue">必須</span></br>
+									<small>例）１３時００分</small></th>
+					<td><%= f.time_field :break_out %></td>
+				</tr>
+				<tr>
+					<th>勤務終了時間<span class="label label-blue">必須</span></br>
+									<small>例）１９時００分</small></th>
+					<td><%= f.time_field :work_out%></td>
+				</tr>
+				<tr>
+					<th>休日<span class="label label-blue">必須</span></br>
+									<small>例）火曜日</small></th>
+					<td><%= f.text_field :holiday%></td>
+				</tr>
+				<tr>
+					<th>手当<span class="label label-blue">必須</span></br>
+									<small>例）売上歩合</small></th>
+					<td><%= f.text_field :allowance%></td>
+				</tr>
+				<tr>
+					<th>手当詳細<span class="label label-blue">必須</span></br>
+									<small>例）売上の５％</small></th>
+					<td><%= f.text_field :allowance_contents%></td>
+				</tr>
+				<tr>
+					<th>締め日<span class="label label-blue">必須</span></br>
+									<small>例）31日</small></th>
+					<td><%= f.number_field :closing_date%>日</td>
+				</tr>
+				<tr>
+					<th>支払い日<span class="label label-blue">必須</span></br>
+									<small>例）5日</small></th>
+					<td><%= f.number_field :payment_date%>日</td>
+				</tr>
+				<tr>
+					<th>控除<span class="label label-blue">必須</span></br>
+									<small>例）雇用保険・厚生年金・健康保険・源泉徴収</small></th>
+					<td><%= f.radio_button :desuction,'雇用保険'%>雇用保険
+							<%= f.radio_button :desuction,'厚生年金'%>厚生年金
+							<%= f.radio_button :desuction,'健康保険'%>健康保険
+							<%= f.radio_button :desuction,'介護保険'%>介護保険
+							<%= f.radio_button :desuction,'源泉徴収'%>源泉徴収
+							<%= f.radio_button :desuction,'住民税'%>住民税
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">  
+							<%= f.submit '登録', data: { confirm: '登録しますか？'}%>
+					</td>
+				</tr>
+			</table>
+		<% end %>
+ </div>

@@ -1,0 +1,14 @@
+<%= start_form_tag :action =>'through_date_user_list' %>
+<table class='confirm'>
+  <tr>
+    <th>選択日の出勤表表示</th>
+  </tr>
+  <tr>
+    <td><%= select_date(session[:currentdate],:use_month_numbers => true) %></td>
+  </tr>
+  <tr>
+    <td>
+      <%= submit_tag "選択" %>
+    </td>
+  </tr>
+</table> <%= end_form_tag %>

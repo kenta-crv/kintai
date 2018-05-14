@@ -1,0 +1,154 @@
+
+<div id="side_navi">
+		<h2 class="heading">登録者一覧</h2>
+			<table>
+        			<colgroup>
+            			<col width="35%">
+            			<col width="65%">
+       			　 </colgroup>
+       			<% @managements.each do |management|%>
+        		<tr>
+					<th>会社名</th>
+					<td><%= link_to management.company, managements_path(management)%></td>
+				</tr>
+				<tr>
+					<th>略称</th>
+					<td><%= management.company_short %></td>
+				</tr>
+				<tr>
+					<th>代表者姓</th>
+					<td><%= management.first_name %></td>
+				</tr>
+				<tr>
+					<th>代表者名</th>
+					<td><%= management.last_name %></td>
+				</tr>
+				<tr>
+					<th>ミョウジ</th>
+					<td><%= management.first_kana %></td>
+				</tr>
+				<tr>
+					<th>ナマエ</th>
+					<td><%= management.last_kana %></td>
+				</tr>
+				<tr>
+					<th>電話番号</th>
+					<td><%= management.tel %></td>
+				</tr>
+				<tr>
+					<th>メールアドレス</th>
+					<td><%= management.e_mail %></td>
+				</tr>
+				<tr>
+					<th>郵便番号</th>
+					<td><%= management.postnumber %></td>
+				</tr>
+				<tr>
+					<th>住所</th>
+					<td><%= management.address %></td>
+				</tr>
+				<tr>
+					<th>資本金</th>
+					<td><%= management.capital %></td>
+				</tr>
+				<tr>
+					<th>労働保険番号</th>
+					<td><%= management.labor_number %></td>
+				</tr>
+				<tr>
+					<th>雇用保険番号</th>
+					<td><%= management.labor_number %></td>
+				</tr>
+										
+								<% end %>
+			</table>
+ </div>
+<div id="main">
+
+<h2 class="worker_h2">事業所情報を登録する</h2>
+		<%= form_for :management, url: managements_path do |f|%>
+			<table class="worker_table">
+				<caption>基本情報</caption>
+        			<colgroup>
+            			<col width="40%">
+            			<col width="60%">
+       			　 </colgroup>
+        		<tr>
+					<th>会社名<span class="label label-blue">必須</span></br>
+									<small>例）株式会社Crold Valieat</small></th>
+					<td><%= f.text_field :company%></td>
+				</tr>
+				<tr>
+					<th>略称<span class="label label-blue">必須</span></br>
+									<small>例）本店</small></th>
+					<td><%= f.text_field :company_short%></td>
+				</tr>
+				<tr>
+					<th>代表者姓<span class="label label-blue">必須</span></br>
+									<small>例）奥山</small></th>
+					<td><%= f.text_field :first_name%></td>
+				</tr>
+				<tr>
+					<th>代表者名<span class="label label-blue">必須</span></br>
+									<small>例）健太</small></th>
+					<td><%= f.text_field :last_name %></td>
+				</tr>
+				<tr>
+					<th>ミョウジ<span class="label label-blue">必須</span></br>
+									<small>例）オクヤマ</small></th>
+					<td><%= f.text_field :first_kana%></td>
+				</tr>
+				<tr>
+					<th>ナマエ<span class="label label-blue">必須</span></br>
+									<small>例）ケンタ</small></th>
+					<td><%= f.text_field :last_kana%></td>
+				</tr>
+				<tr>
+					<th>電話番号<span class="label label-blue">必須</span></br>
+									<small>例）03-6712-7837</small></th>
+					<td><%= f.telephone_field :tel%></td>
+				</tr>
+				<tr>
+					<th>FAX番号<span class="label label-blue">必須</span></br>
+									<small>例）03-6712-7838</small></th>
+					<td><%= f.telephone_field :fax%></td>
+				</tr>
+				<tr>
+					<th>メールアドレス<span class="label label-blue">必須</span></br>
+									<small>例）adp@crold-valieat.jp</small></th>
+					<td><%= f.email_field :e_mail%></td>
+				</tr>
+				<tr>
+					<th>郵便番号<span class="label label-blue">必須</span></br>
+									<small>例）1500032</small></th>
+					<td><%= f.number_field :postnumber%></td>
+				</tr>
+				<tr>
+					<th>住所<span class="label label-blue">必須</span></br>
+									<small>例）東京都渋谷区鶯谷町19-19第三叶ビル303号室</small></th>
+					<td><%= f.text_field :address%></td>
+				</tr>
+				<tr>
+					<th>資本金<span class="label label-blue">必須</span></br>
+									<small>例）270万円</small></th>
+					<td><%= f.number_field :capital%>万円</td>
+				</tr>
+				<tr>
+					<th>労働保険番号<span class="label label-blue">必須</span></br>
+									<small>例）1111-111111-111</small></th>
+					<td><%= f.number_field :labor_number%></td>
+				</tr>
+				<tr>
+					<th>雇用保険番号<span class="label label-blue">必須</span></br>
+									<small>例）1111-111111-1</small></th>
+					<td><%= f.number_field :employment_number%></td>
+				</tr>
+				<tr>
+					<td colspan="2"> 
+							<%= f.submit '登録', data: { confirm: '登録しますか？'}%>
+					</td>
+				</tr>
+			</table>
+		<% end %>
+ </div>
+

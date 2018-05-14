@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  try: MyString
+  work_start: MyString
+  break_in: MyString
+  break_out: MyString
+  work_out: MyString
+  holiday: MyString
+  allowance: MyString
+  allowance_contents: MyString
+  closing_date: MyString
+  payment_date: MyString
+  desuction: MyString
+
+two:
+  try: MyString
+  work_start: MyString
+  break_in: MyString
+  break_out: MyString
+  work_out: MyString
+  holiday: MyString
+  allowance: MyString
+  allowance_contents: MyString
+  closing_date: MyString
+  payment_date: MyString
+  desuction: MyString

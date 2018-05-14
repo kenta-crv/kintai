@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  company: MyString
+  company_short: MyString
+  first_name: MyString
+  last_name: MyString
+  first_kana: MyString
+  last_kana: MyString
+  tel: MyString
+  fax: MyString
+  e_mail: MyString
+  postnumber: MyString
+  address: MyString
+  capital: MyString
+  labor_number: MyString
+  employment_number: MyString
+
+two:
+  company: MyString
+  company_short: MyString
+  first_name: MyString
+  last_name: MyString
+  first_kana: MyString
+  last_kana: MyString
+  tel: MyString
+  fax: MyString
+  e_mail: MyString
+  postnumber: MyString
+  address: MyString
+  capital: MyString
+  labor_number: MyString
+  employment_number: MyString
