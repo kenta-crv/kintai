@@ -4,7 +4,7 @@ class MainController < ApplicationController
   private
     def check_user_login
       unless user_signed_in?
-        redirecto_to new_user_session_url and return
+        redirect_to new_user_session_url and return
       end
       @current_user = current_user
     end
