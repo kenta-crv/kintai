@@ -1,4 +1,5 @@
 class WorkersController < ApplicationController
+  # before_action :set_worker, only:  [:show, :edit, :update, :destroy, :print]
 
   def index
   	 @workers = Worker.all.order(created_at: 'desc')
@@ -44,7 +45,72 @@ class WorkersController < ApplicationController
     redirect_to workers_path
  end
 
+
+  # 帳票出力処理
+  def print
+    report = Thinreports::Report.new layout: "app/reports/layouts/salary.tlf"
+    report.start_new_page
+    report.page.values(
+      company_name: "サンプル",
+      # company_name: @worker.management.try(:company),
+      paid_month: "2018年7月度 (7/1 - 7/31)",
+      user_name: "山田一郎",
+      # user_name: @worker.user.try(:name),
+      work_days: 19
+      # work_days: current_user.attends.where(" ? <= start_at and start_at < ? ", Time.local(2018,7,1,0,0,0), Time.local(2018,8,1,0,0,0)).count
+    )
+    report.page.list do |list|
+      # sub_total = 0
+      # total = 0
+
+      # # Dispatch at list-page-footer insertion.
+      # list.on_page_footer_insert do |page_footer|
+      #   # Set subtotal.
+      #   page_footer.item(:sub_total).value(sub_total)
+      #   # Initialize subtotal to 0.
+      #   sub_total = 0
+      # end
+
+      # # Dispatch at list-footer insertion.
+      # list.on_footer_insert do |footer|
+      #   # Set total.
+      #   footer.item(:total).value(total)
+      # end
+
+      # current_user.attends.where(" ? <= start_at and start_at < ? ", Time.local(2018,7,1,0,0,0), Time.local(2018,8,1,0,0,0)).each.with_index(1) do |item, idx|
+      (1..3).each.with_index(1) do |_sample, idx|
+        # Add an row of list.
+        list.add_row({
+          no: idx,
+          # work_on: item.start_at.to_date,
+          # work_time: "#{I18n.l(item.start_at, format: :xs)}-#{I18n.l(item.end_at, format: :xs)}",
+          work_on: Date.today + idx.days,
+          work_time: "9:55-18:13",
+          rest_time1: "12:05-13:02",
+          rest_time2: "",
+          unit_price: 1200,
+          amount: 7,
+          price: 8400,
+          other_price: 600,
+        })
+        # list.add_row do |row|
+        #   row[:rate].value("#{item.rate}THB")
+        # end
+
+        # # Calculate the amount.
+        # sub_total += item.amount
+        # total += item.amount
+      end
+    end
+    send_data(report.generate, filename: "worker-#{Time.zone.now.to_formatted_s(:number)}.pdf", type: "application/pdf")
+  end
+
+
   private
+    def set_worker
+      @worker = Worker.find(params[:id])
+    end
+
     def worker_params
       params.require(:worker).permit(
       :first_name,

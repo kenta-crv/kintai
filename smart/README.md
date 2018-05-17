@@ -83,7 +83,13 @@ private
   end
 ```
 
-Staff のログイン関連のviews
+#### User のログイン関連のviews
+
+app/views/devise -> app/views/users
+<br/>
+にディレクトリを変更しております
+
+#### Staff のログイン関連のviews
 
 app/views/staffs/ 直下に一式設置<br/>
 このディレクトリのファイルを編集することで
@@ -93,6 +99,13 @@ app/views/layouts/staffs.html.erb
 <br/>
 「弊社管理画面」レイアウトがユーザー画面とレイアウトが違う場合は上記をご利用くださいませ。
 
+#### devise関連の画面項目名
+* config/locales/devise.ja.yml
+
+上記を編集いただくことで日本語化することができます。
+
+合わせて、以下のファイルも日本語エラーメッセージを表示するのに必要ですので追加しております。
+* config/locales/ja.yml
 
 ## (3)の制作
 ### User
@@ -132,7 +145,7 @@ finish：退勤ボタン押下した際の登録処理
 ## (4)の制作
 ### 帳票
 
-User Thinreports<br/>
+Use Thinreports<br/>
 http://www.thinreports.org/
 
 Gemfile
