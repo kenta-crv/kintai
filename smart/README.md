@@ -55,6 +55,14 @@ set redirector like the following in ApplicationController(app/controllers/appli
 
 2点のdevise利用したモデルが存在するので、以下の通りに追加しております
 
+* after_sign_in_path_for
+
+  User（ユーザー）やStaff（「弊社管理者」）がログインした後にどの画面に遷移するかを記載
+
+* after_sign_out_path_for
+
+  User（ユーザー）やStaff（「弊社管理者」）がログアウトした後にどの画面に遷移するかを記載
+
 ```ruby
 private
   # set for devise login redirector
