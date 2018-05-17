@@ -27,7 +27,8 @@ Things you may want to cover:
 
 ------
 
-## Staff
+## (1)(2)の制作
+### Staff
 
 create staff model for [弊社管理者] role
 
@@ -88,14 +89,19 @@ app/views/staffs/ 直下に一式設置<br/>
 このディレクトリのファイルを編集することで
 Staff用の画面内容を変更できます
 
+app/views/layouts/staffs.html.erb
+<br/>
+「弊社管理画面」レイアウトがユーザー画面とレイアウトが違う場合は上記をご利用くださいませ。
 
-## User
+
+## (3)の制作
+### User
 
 User モデルのログインセッションチェック及び、ログイン中にのみ、出勤・退勤のボタン押下できるようにするため
 MainController (app/controllers/main_controller.rb) を追加
 このコントローラーを継承することでログイン中のいかなる処理も必ずログインセッションのチェックをすることが可能になる
 
-## Attend
+### Attend
 
 出勤／退勤の登録
 
@@ -103,7 +109,28 @@ MainController (app/controllers/main_controller.rb) を追加
 rails g scaffold attend user:belongs_to
 ```
 
-## 帳票
+app/views/home/index.html.erb
+<br/>
+出勤・退勤のボタン押下のサンプル処理を追加
+
+app/controllers/attends_controller.rb
+<br/>
+start：出勤ボタン押下した際の登録処理
+<br/>
+finish：退勤ボタン押下した際の登録処理
+
+```ruby
+  def start
+    ...
+  end
+
+  def finish
+    ...
+  end
+```
+
+## (4)の制作
+### 帳票
 
 User Thinreports<br/>
 http://www.thinreports.org/
@@ -140,3 +167,13 @@ def print
   ...
 end
 ```
+
+## (5)の制作
+### db/migrateの編集
+#### 編集したテーブル
+* rurles：managementsテーブル、usersテーブルのリレーションを追加、整数型・日付型のカラムを修正
+* users：managementsテーブル、workersテーブルのリレーションを追加
+
+#### 追加したテーブル
+* staffs：「弊社管理」ログイン用の従業員モデル・テーブル
+* attends：出席・退勤を保存するモデル・テーブル
