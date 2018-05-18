@@ -198,3 +198,71 @@ end
 #### 追加したテーブル
 * staffs：「弊社管理」ログイン用の従業員モデル・テーブル
 * attends：出席・退勤を保存するモデル・テーブル
+
+
+# 2018.05.18 [1]
+- - -
+## (2)新規作成画面
+
+新規作成用のdeviseのコントローラーをカスタマイズ
+
+```terminal
+rails g devise:controllers users -c=registrations
+```
+
+app/controllers/users/registrations_controller.rb の以下のメソッドを編集
+
+```ruby
+# GET /resource/sign_up
+def new
+  # 実際のcontrollerの内容を参照ください
+end
+
+# POST /resource
+def create
+  # 実際のcontrollerの内容を参照ください
+end
+```
+
+app/views/users/registrations/new.html.erb に追記
+
+```html
+<div class="field">
+  <%= label :management, :company %><br />
+  <%= text_field :management, :company %>
+</div>
+<div class="field">
+  <%= label :management, :company_short %><br />
+  <%= text_field :management, :company_short %>
+</div>
+<%# 上記と同様にしてmanagementsテーブルで必要な項目を追加していってください %>
+
+<div class="field">
+  <%= label :rule, :trial_period_start_on %><br />
+  <%= date_field :rule, :trial_period_start_on %>
+</div>
+<div class="field">
+  <%= label :rule, :trial_period_end_on %><br />
+  <%= date_field :rule, :trial_period_end_on %>
+</div>
+<%# 上記と同様にしてrulesテーブルで必要な項目を追加していってください %>
+```
+
+routes.rb に以下を追記
+```ruby
+devise_for :users, controllers: {
+  registrations: 'users/registrations'
+}
+```
+
+## (4)出勤簿・賃金台帳への反映
+
+app/controllers/attends_controller.rb の #printメソッドを参照くださいませ
+
+データの取得方法を記載しております
+
+これを元に画面を作成いただければと思います
+
+このメソッドは給与明細印刷に利用しているメソッドです
+
+出力しているデータは出勤・退勤ボタンを押下した際に取得したデータをそのまま表示しております

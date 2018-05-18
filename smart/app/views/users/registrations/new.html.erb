@@ -4,6 +4,24 @@
   <%= devise_error_messages! %>
 
   <div class="field">
+    <%= label :management, :company %><br />
+    <%= text_field :management, :company %>
+  </div>
+  <div class="field">
+    <%= label :management, :company_short %><br />
+    <%= text_field :management, :company_short %>
+  </div>
+
+  <div class="field">
+    <%= label :rule, :trial_period_start_on %><br />
+    <%= date_field :rule, :trial_period_start_on %>
+  </div>
+  <div class="field">
+    <%= label :rule, :trial_period_end_on %><br />
+    <%= date_field :rule, :trial_period_end_on %>
+  </div>
+
+  <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>

@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   end
 
   devise_for :staffs
-  devise_for :users
+  devise_for :users, controllers: {
+    registrations: 'users/registrations'
+  }
 
   
   root to: "home#index"

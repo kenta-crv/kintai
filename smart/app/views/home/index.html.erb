@@ -18,5 +18,7 @@
   <%- end -%>
   <br/>
   <%# print_worker_path(1) の1は暫定的に設定。実際はworkerの当該IDをセットすること %>
-  <%= link_to("テストプリント", print_worker_path(1), class: "square_btn stump", target: "_blank") %>
+  <%- if @current_attend.present? -%>
+    <%= link_to("テストプリント", print_worker_path(1), class: "square_btn stump", target: "_blank") %>
+  <%- end -%>
 </div>

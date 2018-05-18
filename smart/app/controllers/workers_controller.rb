@@ -56,7 +56,8 @@ class WorkersController < ApplicationController
       paid_month: "2018年7月度 (7/1 - 7/31)",
       user_name: "山田一郎",
       # user_name: @worker.user.try(:name),
-      work_days: 19
+      work_days: current_user.attends.count
+      # work_days: 19
       # work_days: current_user.attends.where(" ? <= start_at and start_at < ? ", Time.local(2018,7,1,0,0,0), Time.local(2018,8,1,0,0,0)).count
     )
     report.page.list do |list|
@@ -77,16 +78,17 @@ class WorkersController < ApplicationController
       #   footer.item(:total).value(total)
       # end
 
-      # current_user.attends.where(" ? <= start_at and start_at < ? ", Time.local(2018,7,1,0,0,0), Time.local(2018,8,1,0,0,0)).each.with_index(1) do |item, idx|
-      (1..3).each.with_index(1) do |_sample, idx|
+      # Array(current_user.attends.where(" ? <= start_at and start_at < ? ", Time.local(2018,7,1,0,0,0), Time.local(2018,8,1,0,0,0))).each.with_index(1) do |item, idx|
+      # (1..3).each.with_index(1) do |_sample, idx|
+      Array(current_user.attends).each.with_index(1) do |item, idx|
         # Add an row of list.
         list.add_row({
           no: idx,
-          # work_on: item.start_at.to_date,
-          # work_time: "#{I18n.l(item.start_at, format: :xs)}-#{I18n.l(item.end_at, format: :xs)}",
-          work_on: Date.today + idx.days,
-          work_time: "9:55-18:13",
-          rest_time1: "12:05-13:02",
+          work_on: I18n.l(item.start_at.to_date),
+          work_time: "#{I18n.l(item.start_at, format: :xs)}-#{I18n.l(item.end_at, format: :xs)}",
+          # work_on: Date.today + idx.days,
+          # work_time: "9:55-18:13",
+          # rest_time1: "12:05-13:02",
           rest_time2: "",
           unit_price: 1200,
           amount: 7,
