@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  layout :layout_by_resource
 
   private
     # set for devise login redirector
@@ -28,4 +29,13 @@ class ApplicationController < ActionController::Base
         super
       end
     end
+
+  # Layout per resource_name
+  def layout_by_resource
+    if devise_controller? && resource_name == :staff
+      "staffs"
+    else
+      "application"
+    end
+  end
 end

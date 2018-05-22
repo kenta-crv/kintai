@@ -36,13 +36,13 @@
            <%= link_to  '就業規則作成' ,'/rules'%>
            <%= link_to  '従業員登録' ,'/workers'%>
            
-            <% if user_signed_in? %>
+            <% if staff_signed_in? %>
             <!-- current_user は現在ログインしているUserオブジェクトを返すdeviseのHelperメソッド -->
             <!-- *_path はUserモデルを作成したときに、deviseにより自動で作成されてますので、rake routesで確認できます -->
                     <strong><% current_user.email  %></strong>
-                        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+                        <%= link_to "ログアウト", destroy_staff_session_path, method: :delete %>
             <% else %>
-                        <%= link_to "ログイン", new_user_session_path%>
+                        <%= link_to "ログイン(staff)", new_staff_session_path%>
              <% end %>
       </div>
     </div>

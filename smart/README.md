@@ -266,3 +266,56 @@ app/controllers/attends_controller.rb の #printメソッドを参照くださ�
 このメソッドは給与明細印刷に利用しているメソッドです
 
 出力しているデータは出勤・退勤ボタンを押下した際に取得したデータをそのまま表示しております
+
+- - -
+
+# 2018.05.22 [1]
+
+## Staffレイアウト
+
+app/controllers/application_controller.rb に以下を追記
+
+```ruby
+layout :layout_by_resource
+
+...
+private
+...
+  # Layout per resource_name
+  def layout_by_resource
+    if devise_controller? && resource_name == :staff
+      "staffs"
+    else
+      "application"
+    end
+  end
+```
+
+app/views/layouts/staffs.html.erb を編集
+
+「ログイン」→「ログイン(staff)」
+
+```html
+<% if staff_signed_in? %>
+<!-- current_user は現在ログインしているUserオブジェクトを返すdeviseのHelperメソッド -->
+<!-- *_path はUserモデルを作成したときに、deviseにより自動で作成されてますので、rake routesで確認できます -->
+        <strong><% current_user.email  %></strong>
+            <%= link_to "ログアウト", destroy_staff_session_path, method: :delete %>
+<% else %>
+            <%= link_to "ログイン(staff)", new_staff_session_path%>
+ <% end %>
+```
+
+* users でアクセス
+
+  /users/sign_in
+
+  ヘッダーメニュー「ログイン」になっている
+
+* staffs でアクセス
+
+  /staffs/sign_in
+
+  ヘッダーメニュー「ログイン(staff)」になっている
+
+それぞれでアクセスして確認くださいませ。
