@@ -319,3 +319,33 @@ app/views/layouts/staffs.html.erb を編集
   ヘッダーメニュー「ログイン(staff)」になっている
 
 それぞれでアクセスして確認くださいませ。
+
+- - -
+# 2018.05.28 [1]
+## bugfix : homeの「テストプリント」ボタン押下を修正
+
+app/views/home/index.html.erb
+
+```html
+<%- if @current_attend.present? -%>
+
+を以下に修正
+
+<%- if current_user.present? && current_user.attends.exists? -%>
+```
+
+app/controllers/workers_controller.rb
+
+  end_atがnilの場合、exception発生を修正しました。
+
+```ruby
+work_time: "#{I18n.l(item.start_at, format: :xs)}-#{I18n.l(item.end_at, format: :xs)}",
+
+を以下に修正
+
+_start_at = item.start_at.present? ? I18n.l(item.start_at, format: :xs) : nil
+_end_at   = item.end_at.present? ? I18n.l(item.end_at, format: :xs) : nil
+...
+work_time: "#{_start_at}-#{_end_at}",
+...
+```

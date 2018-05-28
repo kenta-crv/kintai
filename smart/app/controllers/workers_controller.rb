@@ -82,10 +82,12 @@ class WorkersController < ApplicationController
       # (1..3).each.with_index(1) do |_sample, idx|
       Array(current_user.attends).each.with_index(1) do |item, idx|
         # Add an row of list.
+        _start_at = item.start_at.present? ? I18n.l(item.start_at, format: :xs) : nil
+        _end_at   = item.end_at.present? ? I18n.l(item.end_at, format: :xs) : nil
         list.add_row({
           no: idx,
           work_on: I18n.l(item.start_at.to_date),
-          work_time: "#{I18n.l(item.start_at, format: :xs)}-#{I18n.l(item.end_at, format: :xs)}",
+          work_time: "#{_start_at}-#{_end_at}",
           # work_on: Date.today + idx.days,
           # work_time: "9:55-18:13",
           # rest_time1: "12:05-13:02",
