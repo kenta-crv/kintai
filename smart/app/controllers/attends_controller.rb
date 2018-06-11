@@ -1,5 +1,5 @@
 class AttendsController < MainController
-  before_action :set_attend, only: [:show, :edit, :update, :destroy]
+  before_action :set_attend, only: [:show, :edit, :update, :destroy, :rest_time_start, :rest_time_end]
 
   # GET /attends
   # GET /attends.json
@@ -85,6 +85,31 @@ class AttendsController < MainController
     respond_to do |format|
       if @attend.save
         format.html { redirect_to root_path, notice: 'Attend was successfully updated.' }
+      else
+        format.html { redirect_to root_path, errors: @attend.errors }
+        format.json { render json: @attend.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def rest_time_start
+    @attend.rest_start_at = Time.current
+
+    respond_to do |format|
+      if @attend.save
+        format.html { redirect_to root_path, notice: 'Attend.rest_start_at was successfully updated.' }
+      else
+        format.html { redirect_to root_path, errors: @attend.errors }
+        format.json { render json: @attend.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  def rest_time_end
+    @attend.rest_end_at = Time.current
+
+    respond_to do |format|
+      if @attend.save
+        format.html { redirect_to root_path, notice: 'Attend.rest_end_at was successfully updated.' }
       else
         format.html { redirect_to root_path, errors: @attend.errors }
         format.json { render json: @attend.errors, status: :unprocessable_entity }

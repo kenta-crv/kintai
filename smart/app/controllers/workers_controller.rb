@@ -84,13 +84,15 @@ class WorkersController < ApplicationController
         # Add an row of list.
         _start_at = item.start_at.present? ? I18n.l(item.start_at, format: :xs) : nil
         _end_at   = item.end_at.present? ? I18n.l(item.end_at, format: :xs) : nil
+        _rest_start_at = item.rest_start_at.present? ? I18n.l(item.rest_start_at, format: :xs) : nil
+        _rest_end_at   = item.rest_end_at.present? ? I18n.l(item.rest_end_at, format: :xs) : nil
         list.add_row({
           no: idx,
           work_on: I18n.l(item.start_at.to_date),
           work_time: "#{_start_at}-#{_end_at}",
           # work_on: Date.today + idx.days,
           # work_time: "9:55-18:13",
-          # rest_time1: "12:05-13:02",
+          rest_time1: "#{_rest_start_at}-#{_rest_end_at}",
           rest_time2: "",
           unit_price: 1200,
           amount: 7,

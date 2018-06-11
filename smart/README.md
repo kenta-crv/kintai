@@ -349,3 +349,71 @@ _end_at   = item.end_at.present? ? I18n.l(item.end_at, format: :xs) : nil
 work_time: "#{_start_at}-#{_end_at}",
 ...
 ```
+
+- - -
+# 2018.06.11 [1]
+## (3)(4)→app/controllers/workers_controller.rb#print に休憩ロジック
+
+* app/controllers/attends_controller.rb
+
+  以下を追加しております
+
+  ```ruby
+  # 休憩開始
+  def rest_time_start
+    ...
+    # 実際のロジックを参照ください
+    ...
+  end
+  # 休憩終了
+  def rest_time_end
+    ...
+    # 実際のロジックを参照ください
+    ...
+  end
+  ```
+
+* app/views/home/index.html.erb
+
+  休憩の開始・終了を追加しております
+  内容は実際のファイルを参照ください
+  各々ボタン押下で保存されるようになっています
+
+* app/controllers/workers_controller.rb
+
+  「テストプリント」ボタン押下で休憩が印字されるようにしております
+
+  ```ruby
+  ...
+  # 以下を追加
+  _rest_start_at = item.rest_start_at.present? ? I18n.l(item.rest_start_at, format: :xs) : nil
+  _rest_end_at   = item.rest_end_at.present? ? I18n.l(item.rest_end_at, format: :xs) : nil
+  ...
+  rest_time1: "#{_rest_start_at}-#{_rest_end_at}",
+  ...
+  ```
+
+  明細取得はテストプリントを印字するときのロジックです
+  別例挙げておきます
+  以下を参考にください
+
+  ```ruby
+  # line:81を参考に（ファイル上はコメントアウトしてあります）
+  # 例:7月度（7月1日〜末日）の例を記載
+  Array(current_user.attends.where(" ? <= start_at and start_at < ? ", Time.local(2018,7,1,0,0,0), Time.local(2018,8,1,0,0,0))).each.with_index(1) do |item, idx|
+    ...
+  end
+  ```
+
+* config/routes.rb
+
+  以下を追加しております
+
+  ```ruby
+  resources :attends do
+    ...
+    get :rest_time_start
+    get :rest_time_end
+    ...
+  end
+  ```
