@@ -417,3 +417,74 @@ work_time: "#{_start_at}-#{_end_at}",
     ...
   end
   ```
+
+
+- - -
+# 2018.07.02
+## ・Device新規登録にてbelong_toを利用して別モデルと共に登録を行おうとしておりますが、f.submitにてエラーが発生する]
+
+
+  リダイレクト処理がありません。
+  ```ruby
+  redirect_to :controller => 'controller_name', :action => 'action_name'
+  ```
+
+## ・請求書のPDF（ThinReports）を作成したい。
+
+
+　大まかには下記の手順で請求書PDF作成ができます。参考にしてください。
+
+　①請求書レイアウトを専用のレポートデザイナ「Thinreports Editor」にて作成する。※動的に値を設定する箇所は変数名を付与（ex. billing_id）
+
+　②1で作成したテンプレートファイルを/app/pdf/に配置する（ex. sample.tlf）
+
+　③Controllerで値と設定する。
+
+  ```ruby
+
+　# TLFファイル読み込み
+　report = ThinReports::Report.new :layout => "app/pdfs/order_pdf.tlf"
+
+　# 1ページ目を開始
+　report.start_new_page
+
+  # 動的な値を設定する
+  report.page.item(:billing_id).value(@billing.id)
+
+  # ブラウザでPDFを表示する
+  send_data report.generate,
+          filename:    "#{@billing.id}.pdf",
+          type:        "application/pdf",
+          disposition: "inline"
+
+  ```
+
+## ・現在打刻の仕組みは作成完了しておりますが、Staff毎に打刻を出来るようにしたい。また連動するかとは存じますが、Staff毎に明細確認やシフト確認を出来るようにしたいです。
+## ・ログインを行う前について、現在ヘッダーが表示されるのでうsが、ヘッダーを表示しないようにしたい
+
+　画面の流れとしては以下の通りのイメージになるかと思われます。
+
+　①indexページでログインしてセッションでユーザ情報を保持する。
+
+　②現在のapplication.html.rbにリダイレクト（ご教示いただいたhttps://timecard.smaregi.jp/feature/attendance.phpのイメージ）
+
+　参考：https://qiita.com/brainya/items/f2d8e9307206267d375f
+
+
+## ・これはjavascriptも加わって来るのかと存じますが、時間が現在の日本時間と少しずれてしまっていますのでそれを修正したいです。
+
+
+　実行環境のサーバ時刻のタイムゾーン設定が誤っている可能性があります。
+
+　当方、仮想環境のCentOS上に環境作成しましたが、
+
+　タイムゾーン設定を変更したら現在時刻が表示されるようになりました。
+
+
+　①現在、変更後のタイムゾーンの確認
+
+　$ date
+
+　②タイムゾーンの変更
+
+　$ sudo timedatectl set-timezone Asia/Tokyo
